@@ -14,7 +14,8 @@ export class ValidationException extends CustomError {
         return {
             errors: this.error.map(err => {
                 return {
-                    message: err.value
+                    message: err.msg,
+                    field: err.param
                 }
             })
         }
