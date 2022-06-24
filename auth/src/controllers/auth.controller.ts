@@ -83,6 +83,10 @@ export class AuthController {
 		if (user) {
 			const roles = user.roles;
 
+			if (roles.map((role) => role.name).indexOf('visitors') !== -1) {
+				throw new UnauthorizedException();
+			}
+
 			roles.push(visitorRole);
 
 			await user.save();
