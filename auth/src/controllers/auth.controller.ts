@@ -83,7 +83,7 @@ export class AuthController {
 		if (user) {
 			const roles = user.roles;
 
-			if (roles.map((role) => role.name).indexOf('visitors') !== -1) {
+			if (userService.hasRole(user, 'visitors')) {
 				throw new UnauthorizedException();
 			}
 
