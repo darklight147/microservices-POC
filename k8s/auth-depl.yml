@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-depl
+  template:
+    metadata:
+      labels:
+        app: auth-depl
+    spec:
+      containers:
+        - name: auth-depl
+          image: quasimodo147/auth-svc:8e1408ec2b584af2e7dfd8ec8bea3ff1cdcef164
+          resources:
+            limits:
+              memory: '128Mi'
+              cpu: '500m'
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: JWT_SECRET
+                  key: JWT_SECRET
+          ports:
+            - containerPort: 3000
