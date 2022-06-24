@@ -5,8 +5,8 @@ on:
     branches:
       - 'master'
     paths:
-      - './auth/**'
-      - './.github/workflows/auth-ci.yml'
+      - 'auth/**'
+      - '.github/workflows/auth-ci.yml'
 
 jobs:
   build_push:
