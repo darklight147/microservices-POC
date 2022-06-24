@@ -1,10 +1,5 @@
 import { Request, Response } from 'express';
-import { resourceUsage } from 'process';
 import { UnauthorizedException } from '../errors/unauthorized-error';
-import { ValidationException } from '../errors/validation-error';
-import { Role } from '../models/Role';
-import { User } from '../models/User';
-import jwtService from '../services/jwt.service';
 import passwordService from '../services/password.service';
 import roleService from '../services/role.service';
 import userService, { UserDoc } from '../services/user.service';
