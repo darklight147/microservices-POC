@@ -1,4 +1,4 @@
-name: ci build docker image
+name: CI for Auth Service
 
 on:
   push:
