@@ -33,7 +33,7 @@ class JwtService {
 	}
 
 	public refresh(req: Request) {
-		const decoded = this.verify(req.session!.refresh);
+		const decoded = this.verifyRefreshToken(req.session!.refresh);
 
 		if (!decoded) {
 			throw new UnauthorizedException();
@@ -47,6 +47,16 @@ class JwtService {
 			...this.options,
 			expiresIn: this.EXPIRE_REFRESH,
 		});
+	}
+
+	private verifyRefreshToken(token: string) {
+		try {
+			return jwt.verify(token, envVars.JWT_REFRESH_SECRET, {
+				...this.options,
+			}) as Payload;
+		} catch (error: any) {
+			return null;
+		}
 	}
 }
 
