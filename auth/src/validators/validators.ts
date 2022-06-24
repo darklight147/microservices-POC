@@ -1,11 +1,11 @@
-import { body } from "express-validator";
+import { body } from 'express-validator';
 
 export const loginValidator = [
-    body('username').isEmail(),
-    body('password').isLength({min: 5})
-]
+	body('username').isEmail().normalizeEmail().trim(),
+	body('password').isLength({ min: 5 }).trim(),
+];
 
 export const signupValidator = [
-    body('username').isEmail(),
-    body('password').isLength({min: 5})
-]
+	body('username').isEmail().isEmail().normalizeEmail().trim(),
+	body('password').isLength({ min: 5 }).trim(),
+];
