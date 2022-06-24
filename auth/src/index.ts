@@ -9,6 +9,8 @@ import mongoose from 'mongoose';
 import cookieSession from 'cookie-session';
 import roleService from './services/role.service';
 import { ROLE } from './services/jwt.service';
+import helmet from 'helmet';
+import cors from 'cors';
 
 async function start() {
 	checkVars();
@@ -32,6 +34,17 @@ async function start() {
 	 * Map Middlewares
 	 */
 
+	app.use(helmet.xssFilter());
+	app.use(helmet.hidePoweredBy());
+	app.use(helmet.noSniff());
+
+	app.use(
+		cors({
+			credentials: true,
+			origin: true,
+		})
+	);
+
 	app.use(express.json({ limit: '10mb' }));
 	app.use(
 		cookieSession({
@@ -39,7 +52,6 @@ async function start() {
 			httpOnly: true,
 		})
 	);
-
 	/**
 	 * Map routes
 	 */
