@@ -3,10 +3,12 @@ import { resourceUsage } from 'process';
 import { UnauthorizedException } from '../errors/unauthorized-error';
 import { ValidationException } from '../errors/validation-error';
 import { Role } from '../models/Role';
+import { User } from '../models/User';
 import jwtService from '../services/jwt.service';
 import passwordService from '../services/password.service';
 import roleService from '../services/role.service';
-import userService from '../services/user.service';
+import userService, { UserDoc } from '../services/user.service';
+import { appendSession } from '../utils/append-session';
 
 export class AuthController {
 	public async login(req: Request, res: Response) {
@@ -22,13 +24,7 @@ export class AuthController {
 			throw new UnauthorizedException();
 		}
 
-		req.session = {
-			jwt: jwtService.sign({
-				id: user.id,
-				username: user.username,
-				roles: user.roles.map((role) => role.name),
-			}),
-		};
+		appendSession(req, user);
 
 		res.status(200).json(user);
 	}
@@ -50,13 +46,7 @@ export class AuthController {
 			roles,
 		});
 
-		req.session = {
-			jwt: jwtService.sign({
-				id: createdUser.id,
-				username: createdUser.username,
-				roles: createdUser.roles.map((role) => role.name),
-			}),
-		};
+		appendSession(req, createdUser);
 
 		res.status(200).json(createdUser);
 	}
@@ -91,13 +81,7 @@ export class AuthController {
 
 			await user.save();
 
-			req.session = {
-				jwt: jwtService.sign({
-					id: user.id,
-					roles: user.roles.map((role) => role.name),
-					username: user.username,
-				}),
-			};
+			appendSession(req, user);
 
 			return res.status(200).json(user);
 		}
@@ -108,13 +92,7 @@ export class AuthController {
 			roles: [visitorRole],
 		});
 
-		req.session = {
-			jwt: jwtService.sign({
-				id: createdUser.id,
-				roles: createdUser.roles.map((role) => role.name),
-				username: createdUser.username,
-			}),
-		};
+		appendSession(req, createdUser);
 
 		res.status(200).json(createdUser);
 	}

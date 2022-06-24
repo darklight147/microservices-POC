@@ -10,7 +10,7 @@ interface UserAttrs {
 	roles: typeof Role[];
 }
 
-interface UserDoc extends Document {
+export interface UserDoc extends Document {
 	username: string;
 	password: string;
 	roles: typeof Role[];
