@@ -16,4 +16,24 @@ services:
     image: mongo:latest
     ports:
       - 27017
+
+  expiration:
+    image: quasimodo147/expiration-svc:latest
+    environment:
+      REDIS_HOST: some-redis
+      RABBIT_URL: some-rabbit
+    depends_on:
+      - some-redis
+      - some-rabbit
+    restart: unless-stopped
+  
+  some-rabbit:
+    image: rabbitmq:3-management
+    ports:
+      - 15672:15672
+      - 5672
+  some-redis:
+    image: redis
+    ports:
+      - 6379
   
