@@ -15,7 +15,7 @@ import cors from 'cors';
 async function start() {
 	checkVars();
 
-	await mongoose.connect(envVars.MONGO_URI);
+	await mongoose.connect(envVars.MONGO_URI!);
 
 	/**
 	 * DBs seed

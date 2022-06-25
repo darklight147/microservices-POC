@@ -17,14 +17,14 @@ class JwtService {
 	constructor(private options: jwt.SignOptions & jwt.VerifyOptions) {}
 
 	public sign(payload: Payload) {
-		return jwt.sign(payload, envVars.JWT_SECRET, {
+		return jwt.sign(payload, envVars.JWT_SECRET!, {
 			...this.options,
 		});
 	}
 
 	public verify(token: string) {
 		try {
-			return jwt.verify(token, envVars.JWT_SECRET, {
+			return jwt.verify(token, envVars.JWT_SECRET!, {
 				...this.options,
 			}) as Payload;
 		} catch (error) {
@@ -43,7 +43,7 @@ class JwtService {
 	}
 
 	public signRefresh(payload: Payload) {
-		return jwt.sign(payload, envVars.JWT_REFRESH_SECRET, {
+		return jwt.sign(payload, envVars.JWT_REFRESH_SECRET!, {
 			...this.options,
 			expiresIn: this.EXPIRE_REFRESH,
 		});
@@ -51,7 +51,7 @@ class JwtService {
 
 	private verifyRefreshToken(token: string) {
 		try {
-			return jwt.verify(token, envVars.JWT_REFRESH_SECRET, {
+			return jwt.verify(token, envVars.JWT_REFRESH_SECRET!, {
 				...this.options,
 			}) as Payload;
 		} catch (error: any) {
