@@ -9,15 +9,22 @@ interface Payload {
 export class GuestAccountCreatedListener extends ListenerAbstract {
 	queueName: string = 'expire:guest-user';
 
-	onMessage(msg: ConsumeMessage | null): void {
+	onMessage = async (msg: ConsumeMessage | null) => {
 		try {
 			const data = JSON.parse(msg?.content.toString() as string) as Payload;
 
-			expirationQueue
-				.add({ userId: data.userId }, { delay: 15 * 60000 })
-				.then(() => this.channel.ack(msg as Message));
+			try {
+				await expirationQueue.add(
+					{ userId: data.userId },
+					{ delay: 15 * 60000 }
+				);
+
+				this.channel.ack(msg as Message);
+			} catch (error) {
+				this.channel.nack(msg as Message, false, true);
+			}
 		} catch (error: any) {
 			this.channel.nack(msg as Message, false, false);
 		}
-	}
+	};
 }
