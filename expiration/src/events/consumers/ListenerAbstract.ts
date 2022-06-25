@@ -1,11 +1,5 @@
 import { Channel, Connection, ConsumeMessage } from 'amqplib';
-
-interface Event {
-	subject: string;
-	data: any;
-}
-
-export abstract class ListenerAbstract<T extends Event> {
+export abstract class ListenerAbstract {
 	abstract onMessage(msg: ConsumeMessage | null): void;
 	abstract queueName: string;
 	protected channel!: Channel;
