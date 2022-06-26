@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
+import rabbitmqWrappers from '../config/rabbitmq.wrappers';
 import { UnauthorizedException } from '../errors/unauthorized-error';
+import { GuestUserExpirePublisher } from '../events/publishers/GuestUserPublisher';
 import passwordService from '../services/password.service';
 import roleService from '../services/role.service';
 import userService, { UserDoc } from '../services/user.service';
@@ -88,6 +90,10 @@ export class AuthController {
 		});
 
 		appendSession(req, createdUser);
+
+		new GuestUserExpirePublisher(rabbitmqWrappers.connection).publish({
+			userId: createdUser.id,
+		});
 
 		res.status(200).json(createdUser);
 	}

@@ -11,6 +11,8 @@ import roleService from './services/role.service';
 import { ROLE } from './services/jwt.service';
 import helmet from 'helmet';
 import cors from 'cors';
+import { GuestUserExpiredListener } from './events/consumers/GuestUserExpiredListener';
+import rabbitmqWrappers from './config/rabbitmq.wrappers';
 
 async function start() {
 	checkVars();
@@ -26,6 +28,14 @@ async function start() {
 	for await (const role of roles) {
 		await roleService.createIfNotExists(role);
 	}
+
+	await rabbitmqWrappers.connect();
+
+	/**
+	 * Init Consumers
+	 */
+
+	await new GuestUserExpiredListener(rabbitmqWrappers.connection).listen();
 
 	const app = express();
 	app.set('trust proxy', 1);

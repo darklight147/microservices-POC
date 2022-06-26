@@ -7,6 +7,7 @@ export const envVars = {
 	JWT_SECRET: process.env.JWT_SECRET,
 	MONGO_URI: process.env.MONGO_URI,
 	JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET,
+	RABBIT_HOST: process.env.RABBIT_HOST,
 };
 
 export const checkVars = () => {
