@@ -10,6 +10,7 @@ services:
       RABBIT_HOST: 'some-rabbit'
       PORT: 3000
       MONGO_URI: mongodb://mongo-auth/auth
+    restart: unless-stopped
     ports:
       - 3000:3000
     links:

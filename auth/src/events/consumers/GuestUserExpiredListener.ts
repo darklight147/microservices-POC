@@ -16,11 +16,11 @@ export class GuestUserExpiredListener extends ListenerAbstract {
 				await user.delete();
 
 				this.channel.ack(msg);
+				return;
 			}
 
 			this.channel.nack(msg, false, false);
+			return;
 		}
-
-		this.channel.ack(msg as Message);
 	};
 }
