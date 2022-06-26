@@ -7,6 +7,7 @@ on:
     paths:
       - 'auth/**'
       - '.github/workflows/auth-ci.yml'
+  workflow_dispatch:
 
 jobs:
   build_push:

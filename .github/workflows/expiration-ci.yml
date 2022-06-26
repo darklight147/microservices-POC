@@ -8,6 +8,8 @@ on:
       - 'expiration/**'
       - '.github/workflows/expiration-ci.yml'
 
+  workflow_dispatch:
+
 jobs:
   build_push:
     runs-on: ubuntu-20.04
