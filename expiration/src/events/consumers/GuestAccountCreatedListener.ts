@@ -16,7 +16,7 @@ export class GuestAccountCreatedListener extends ListenerAbstract {
 			try {
 				await expirationQueue.add(
 					{ userId: data.userId },
-					{ delay: 15 * 60000 }
+					{ delay: 1 * 60000 }
 				);
 
 				this.channel.ack(msg as Message);

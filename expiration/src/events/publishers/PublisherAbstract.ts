@@ -11,7 +11,7 @@ export abstract class PublisherAbstract<T> {
 
 		await this.channel.assertQueue(this.queueName, { durable: true });
 
-		this.channel.sendToQueue(this.queueName, Buffer.from(data));
+		this.channel.sendToQueue(this.queueName, Buffer.from(JSON.stringify(data)));
 
 		console.log('Published to Queue');
 	}
