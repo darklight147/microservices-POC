@@ -6,12 +6,15 @@ services:
     image: quasimodo147/auth-svc:latest
     environment:
       JWT_SECRET: 'YOUR_SECRET'
+      JWT_REFRESH_SECRET: 'YOUR_REFRESH_SECRET'
+      RABBIT_HOST: 'some-rabbit'
       PORT: 3000
       MONGO_URI: mongodb://mongo-auth/auth
     ports:
       - 3000:3000
     links:
       - mongo-auth
+      - some-rabbit
   mongo-auth:
     image: mongo:latest
     ports:
