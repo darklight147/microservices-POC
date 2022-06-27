@@ -4,6 +4,7 @@ import { ListenerAbstract } from './ListenerAbstract';
 
 interface Payload {
 	userId: string;
+	delay: number;
 }
 
 export class GuestAccountCreatedListener extends ListenerAbstract {
@@ -16,7 +17,7 @@ export class GuestAccountCreatedListener extends ListenerAbstract {
 			try {
 				await expirationQueue.add(
 					{ userId: data.userId },
-					{ delay: 1 * 60000 }
+					{ delay: data.delay * 60000 }
 				);
 
 				this.channel.ack(msg as Message);
