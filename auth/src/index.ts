@@ -60,6 +60,8 @@ async function start() {
 		cookieSession({
 			signed: false,
 			httpOnly: true,
+			name: 'session:store',
+			sameSite: 'lax',
 		})
 	);
 	/**
