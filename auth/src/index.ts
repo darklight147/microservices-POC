@@ -61,7 +61,7 @@ async function start() {
 			signed: false,
 			httpOnly: true,
 			name: 'session:store',
-			sameSite: 'strict',
+			sameSite: 'lax',
 		})
 	);
 	/**
