@@ -60,6 +60,7 @@ async function start() {
 		cookieSession({
 			signed: false,
 			httpOnly: true,
+			domain: 'localhost',
 		})
 	);
 	/**
