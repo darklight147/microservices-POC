@@ -16,6 +16,8 @@ export const currentUser = (
 		if (!currentUser && req.session!.refresh) {
 			const refreshedToken = jwtService.refresh(req);
 
+			req.session!.jwt = refreshedToken;
+
 			currentUser = jwtService.verify(refreshedToken);
 		}
 
