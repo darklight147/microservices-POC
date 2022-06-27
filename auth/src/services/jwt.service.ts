@@ -39,7 +39,11 @@ class JwtService {
 			throw new UnauthorizedException();
 		}
 
-		return this.sign(decoded);
+		return this.sign({
+			id: decoded.id,
+			roles: decoded.roles,
+			username: decoded.username,
+		});
 	}
 
 	public signRefresh(payload: Payload) {
