@@ -18,5 +18,4 @@ export const appendSession = (req: Request, user: UserDoc) => {
 	};
 
 	req.sessionOptions.expires = addDays(new Date(), 90);
-	req.sessionOptions.sameSite = 'lax';
 };
