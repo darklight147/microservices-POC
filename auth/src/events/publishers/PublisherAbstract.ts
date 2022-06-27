@@ -1,5 +1,10 @@
 import { Channel, Connection } from 'amqplib';
 
+interface Payload {
+	userId: string;
+	delay: number;
+}
+
 export abstract class PublisherAbstract {
 	abstract queueName: string;
 
@@ -7,7 +12,7 @@ export abstract class PublisherAbstract {
 
 	constructor(private connection: Connection) {}
 
-	public async publish(data: any) {
+	public async publish(data: Payload) {
 		this.channel = await this.connection.createChannel();
 
 		await this.channel.assertQueue(this.queueName, { durable: true });

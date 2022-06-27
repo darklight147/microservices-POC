@@ -8,6 +8,8 @@ import userService, { UserDoc } from '../services/user.service';
 import { appendSession } from '../utils/append-session';
 
 export class AuthController {
+	private static GUEST_EXPIRATION_WINDOW: number = 15; // Minutes
+
 	public async login(req: Request, res: Response) {
 		const { username, password } = req.body;
 
@@ -93,6 +95,7 @@ export class AuthController {
 
 		new GuestUserExpirePublisher(rabbitmqWrappers.connection).publish({
 			userId: createdUser.id,
+			delay: AuthController.GUEST_EXPIRATION_WINDOW,
 		});
 
 		res.status(200).json(createdUser);
