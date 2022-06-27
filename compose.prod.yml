@@ -8,11 +8,11 @@ services:
       JWT_SECRET: 'YOUR_SECRET'
       JWT_REFRESH_SECRET: 'YOUR_REFRESH_SECRET'
       RABBIT_HOST: 'some-rabbit'
-      PORT: 3000
+      PORT: 4000
       MONGO_URI: mongodb://mongo-auth/auth
     restart: unless-stopped
     ports:
-      - 3000:3000
+      - 4000:4000
     links:
       - mongo-auth
       - some-rabbit
@@ -30,6 +30,13 @@ services:
       - some-redis
       - some-rabbit
     restart: unless-stopped
+
+  client:
+    build: ./client
+    ports:
+      - 3000:3000
+    links:
+      - auth
   
   some-rabbit:
     image: rabbitmq:3-management
