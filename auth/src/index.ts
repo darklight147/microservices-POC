@@ -44,9 +44,9 @@ async function start() {
 	 * Map Middlewares
 	 */
 
-	app.use(helmet.xssFilter());
-	app.use(helmet.hidePoweredBy());
-	app.use(helmet.noSniff());
+	// app.use(helmet.xssFilter());
+	// app.use(helmet.hidePoweredBy());
+	// app.use(helmet.noSniff());
 
 	app.use(
 		cors({
