@@ -37,6 +37,17 @@ services:
       - 3000:3000
     links:
       - auth
+    environment:
+      GATEWAY_URL: http://nginx:80
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80
+    links:
+      - auth
   
   some-rabbit:
     image: rabbitmq:3-management
