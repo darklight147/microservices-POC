@@ -32,7 +32,7 @@ services:
     restart: unless-stopped
 
   client:
-    build: ./client
+    image: quasimodo147/client-nextjs:latest
     ports:
       - 3000
     links:
