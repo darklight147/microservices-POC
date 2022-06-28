@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth-depl
-          image: quasimodo147/auth-svc:8e1408ec2b584af2e7dfd8ec8bea3ff1cdcef164
+          image: quasimodo147/auth-svc:latest
           resources:
             limits:
               memory: "128Mi"
@@ -25,8 +25,18 @@ spec:
                 secretKeyRef:
                   name: JWT_SECRET
                   key: JWT_SECRET
+            - name: PORT
+              value: "4000"
+            - name: JWT_REFRESH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: JWT_REFRESH_SECRET
+            - name: MONGO_URI
+              value: mongodb://mongo-auth-srv/auth
+            - name: RABBIT_URI
+              value: amqp://rabbit-srv
           ports:
-            - containerPort: 3000
+            - containerPort: 4000
 
 ---
 apiVersion: v1
@@ -37,5 +47,5 @@ spec:
   selector:
     app: auth-depl
   ports:
-    - port: 3000
-      targetPort: 3000
+    - port: 4000
+      targetPort: 4000

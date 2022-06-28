@@ -18,3 +18,8 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+        env:
+          - name: REDIS_HOST
+            value: expiration-redis-srv
+          - name: RABBIT_URL
+            value: amqp://rabbit-srv

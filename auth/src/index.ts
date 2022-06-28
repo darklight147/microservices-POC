@@ -18,7 +18,7 @@ async function start() {
 	checkVars();
 
 	await mongoose.connect(envVars.MONGO_URI!);
-
+	
 	/**
 	 * DBs seed
 	 */
