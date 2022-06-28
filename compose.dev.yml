@@ -3,7 +3,7 @@ version: '3.1'
 
 services:
   auth:
-    image: quasimodo147/auth-svc:latest
+    build: ./auth
     environment:
       JWT_SECRET: 'YOUR_SECRET'
       JWT_REFRESH_SECRET: 'YOUR_REFRESH_SECRET'
@@ -22,7 +22,7 @@ services:
       - 27017
 
   expiration:
-    image: quasimodo147/expiration-svc:latest
+    build: ./expiration
     environment:
       REDIS_HOST: some-redis
       RABBIT_URL: some-rabbit
@@ -46,7 +46,6 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 80:80
-      - 443:443
     links:
       - auth
   
