@@ -31,14 +31,14 @@ services:
       - some-rabbit
     restart: unless-stopped
 
-  client:
-    build: ./client
-    ports:
-      - 3000
-    links:
-      - auth
-    environment:
-      GATEWAY_URL: http://nginx:80
+  # client:
+  #   build: ./client
+  #   ports:
+  #     - 3000
+  #   links:
+  #     - auth
+  #   environment:
+  #     GATEWAY_URL: http://nginx:80
 
   nginx:
     image: nginx
