@@ -5,7 +5,7 @@ class RabbitMqWrapper {
 	private _connection!: Connection;
 
 	public async connect() {
-		this._connection = await rabbit.connect(`amqp://${envVars.RABBIT_HOST}`);
+		this._connection = await rabbit.connect(`${envVars.RABBIT_URI}`);
 	}
 
 	get connection() {
