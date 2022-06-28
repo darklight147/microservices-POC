@@ -21,10 +21,12 @@ export class GuestAccountCreatedListener extends ListenerAbstract {
 				);
 
 				this.channel.ack(msg as Message);
-			} catch (error) {
+			} catch (error: any) {
+				console.log(error.message);
 				this.channel.nack(msg as Message, false, true);
 			}
 		} catch (error: any) {
+			console.log(error.message)
 			this.channel.nack(msg as Message, false, false);
 		}
 	};
