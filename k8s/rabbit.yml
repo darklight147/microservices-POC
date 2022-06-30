@@ -1,34 +1,51 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: rabbit-depl
+  name: rabbitmq
 spec:
   selector:
     matchLabels:
-      app: rabbit-depl
+      app: rabbitmq
+  serviceName: rabbitmq
+  replicas: 2
   template:
     metadata:
       labels:
-        app: rabbit-depl
+        app: rabbitmq
     spec:
       containers:
-        - name: rabbit-depl
+        - name: rabbitmq
           image: rabbitmq:3-management
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
           ports:
             - containerPort: 5672
-
+              name: tcp
+            - containerPort: 15672
+              name: management-web
+          livenessProbe:
+            exec:
+              command: ['rabbitmq-diagnostics', 'status']
+            initialDelaySeconds: 60
+            periodSeconds: 60
+            timeoutSeconds: 15
+          readinessProbe:
+            exec:
+              command: ['rabbitmq-diagnostics', 'ping']
+            initialDelaySeconds: 20
+            periodSeconds: 60
+            timeoutSeconds: 10
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: rabbit-srv
+  name: rabbitmq-srv
 spec:
+  type: LoadBalancer
   selector:
-    app: rabbit-depl
+    app: rabbitmq
   ports:
     - port: 5672
       targetPort: 5672
+      name: tcp
+    - port: 15672
+      targetPort: 15672
+      name: management-web

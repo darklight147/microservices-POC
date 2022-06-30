@@ -12,14 +12,14 @@ spec:
         app: expiration
     spec:
       containers:
-      - name: expiration
-        image: quasimodo147/expiration:latest
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        env:
-          - name: REDIS_HOST
-            value: expiration-redis-srv
-          - name: RABBIT_URL
-            value: amqp://rabbit-srv
+        - name: expiration
+          image: quasimodo147/expiration-svc:latest
+          resources:
+            limits:
+              memory: '128Mi'
+              cpu: '500m'
+          env:
+            - name: REDIS_HOST
+              value: expiration-redis-srv
+            - name: RABBIT_URL
+              value: amqp://rabbitmq-srv
