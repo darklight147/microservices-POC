@@ -7,7 +7,7 @@ services:
     environment:
       JWT_SECRET: 'YOUR_SECRET'
       JWT_REFRESH_SECRET: 'YOUR_REFRESH_SECRET'
-      RABBIT_HOST: 'some-rabbit'
+      RABBIT_URI: 'amqp://some-rabbit'
       PORT: 4000
       MONGO_URI: mongodb://mongo-auth/auth
     restart: unless-stopped
@@ -25,7 +25,7 @@ services:
     image: quasimodo147/expiration-svc:latest
     environment:
       REDIS_HOST: some-redis
-      RABBIT_URL: some-rabbit
+      RABBIT_URL: amqp://some-rabbit
     depends_on:
       - some-redis
       - some-rabbit
