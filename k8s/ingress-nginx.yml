@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-svc
+  labels:
+    name: ingress-svc
+spec:
+  rules:
+    - http:
+        paths:
+          - pathType: Prefix
+            path: /api/auth
+            backend:
+              service:
+                name: auth-svc
+                port:
+                  number: 4000
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: rabbitmq-srv
+                port:
+                  number: 27017
