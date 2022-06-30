@@ -1,5 +1,9 @@
-import { PublisherAbstract } from './PublisherAbstract';
+import { Publisher } from './PublisherAbstract';
 
-export class GuestAccountExpiredPublisher extends PublisherAbstract<any> {
+interface Payload {
+	userId: string;
+}
+
+export class GuestAccountExpiredPublisher extends Publisher<Payload> {
 	queueName: string = 'guest-user:expired';
 }

@@ -1,6 +1,6 @@
 import { Channel, Connection } from 'amqplib';
 
-export abstract class PublisherAbstract<T> {
+export abstract class Publisher<T> {
 	abstract queueName: string;
 
 	protected channel!: Channel;

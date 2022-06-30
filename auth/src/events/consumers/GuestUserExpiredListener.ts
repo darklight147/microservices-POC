@@ -1,9 +1,9 @@
 import { ConsumeMessage, Message } from 'amqplib';
 import userService from '../../services/user.service';
 import { parseMessage } from '../../utils/parse-message';
-import { ListenerAbstract } from './ListenerAbstract';
+import { Listener } from './ListenerAbstract';
 
-export class GuestUserExpiredListener extends ListenerAbstract {
+export class GuestUserExpiredListener extends Listener {
 	queueName: string = 'guest-user:expired';
 
 	onMessage = async (msg: ConsumeMessage | null) => {

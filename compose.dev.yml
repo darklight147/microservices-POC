@@ -7,7 +7,7 @@ services:
     environment:
       JWT_SECRET: 'YOUR_SECRET'
       JWT_REFRESH_SECRET: 'YOUR_REFRESH_SECRET'
-      RABBIT_HOST: 'some-rabbit'
+      RABBIT_URI: 'amqp://some-rabbit'
       PORT: 4000
       MONGO_URI: mongodb://mongo-auth/auth
     restart: unless-stopped
@@ -25,20 +25,20 @@ services:
     build: ./expiration
     environment:
       REDIS_HOST: some-redis
-      RABBIT_URL: some-rabbit
+      RABBIT_URL: amqp://some-rabbit
     depends_on:
       - some-redis
       - some-rabbit
     restart: unless-stopped
 
-  # client:
-  #   build: ./client
-  #   ports:
-  #     - 3000
-  #   links:
-  #     - auth
-  #   environment:
-  #     GATEWAY_URL: http://nginx:80
+  client:
+    build: ./client
+    ports:
+      - 3000
+    links:
+      - auth
+    environment:
+      GATEWAY_URL: http://nginx:80
 
   nginx:
     image: nginx
@@ -46,8 +46,11 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 80:80
-    links:
+      - 443:443
+    depends_on:
       - auth
+      - expiration
+      - client
   
   some-rabbit:
     image: rabbitmq:3-management

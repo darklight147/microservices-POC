@@ -1,6 +1,6 @@
 import { Channel, Connection, ConsumeMessage } from 'amqplib';
 
-export abstract class ListenerAbstract {
+export abstract class Listener {
 	abstract queueName: string;
 	abstract onMessage: (msg: ConsumeMessage | null) => Promise<void>;
 	protected channel!: Channel;
