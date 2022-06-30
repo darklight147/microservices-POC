@@ -22,7 +22,7 @@ function SignIn({ currentUser }) {
 			password,
 		},
 		method: 'post',
-		onSuccess: (data) => setSuccess(true),
+		onSuccess: (data) => setSuccess(true) && router.push('/profile'),
 		url: '/api/auth/login',
 	});
 
