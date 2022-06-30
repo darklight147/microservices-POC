@@ -93,9 +93,15 @@ export class AuthController {
 
 		appendSession(req, createdUser);
 
+		const expirationDate = new Date();
+
+		expirationDate.setMinutes(
+			expirationDate.getMinutes() + AuthController.GUEST_EXPIRATION_WINDOW
+		);
+
 		new GuestUserExpirePublisher(rabbitmqWrappers.connection).publish({
 			userId: createdUser.id,
-			delay: AuthController.GUEST_EXPIRATION_WINDOW,
+			expiresAt: expirationDate.toISOString(),
 		});
 
 		res.status(200).json(createdUser);
