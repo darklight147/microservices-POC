@@ -12,8 +12,6 @@ export const appendSession = (req: Request, user: UserDoc) => {
 		}),
 		refresh: jwtService.signRefresh({
 			id: user.id,
-			username: user.username,
-			roles: user.roles.map((role) => role.name),
 		}),
 	};
 

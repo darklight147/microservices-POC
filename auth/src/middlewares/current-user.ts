@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import jwtService from '../services/jwt.service';
 
-export const currentUser = (
+export const currentUser = async (
 	req: Request,
 	res: Response,
 	next: NextFunction
@@ -14,7 +14,7 @@ export const currentUser = (
 		let currentUser = jwtService.verify(token);
 
 		if (!currentUser && req.session!.refresh) {
-			const refreshedToken = jwtService.refresh(req);
+			const refreshedToken = await jwtService.refresh(req);
 
 			req.session!.jwt = refreshedToken;
 
