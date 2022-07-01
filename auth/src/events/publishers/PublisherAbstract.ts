@@ -5,7 +5,7 @@ export abstract class Publisher<T> {
 
 	protected channel!: Channel;
 
-	constructor(private connection: Connection) {}
+	constructor(protected connection: Connection) {}
 
 	public async publish(data: T) {
 		this.channel = await this.connection.createChannel();
