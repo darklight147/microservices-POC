@@ -3,6 +3,7 @@ import { Role } from '../models/Role';
 import { Document } from 'mongoose';
 import { RoleDoc } from './role.service';
 import { ROLE } from './jwt.service';
+import passwordService from './password.service';
 
 interface UserAttrs {
 	username: string;
@@ -39,6 +40,17 @@ class UserService {
 		}
 
 		return false;
+	}
+
+	public async update(id: string, attrs: UserAttrs) {
+		return (await User.findByIdAndUpdate(
+			id,
+			{
+				username: attrs.username,
+				password: await passwordService.hash(attrs.password),
+			},
+			{ new: true }
+		)) as UserDoc;
 	}
 }
 

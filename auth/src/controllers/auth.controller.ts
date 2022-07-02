@@ -106,6 +106,26 @@ export class AuthController {
 
 		res.status(200).json(createdUser);
 	}
+
+	public async deleteMe(req: Request, res: Response) {
+		const { id } = req.currentUser;
+		const user = await userService.findById(id);
+		if (!user) {
+			throw new UnauthorizedException();
+		}
+		await user.remove();
+		res.status(204).send();
+	}
+
+	public async updateMe(req: Request, res: Response) {
+		const { id } = req.currentUser;
+		const user = await userService.findById(id);
+		if (!user) {
+			throw new UnauthorizedException();
+		}
+		const newUser = await userService.update(user.id, req.body);
+		res.status(200).json(newUser);
+	}
 }
 
 export default new AuthController();
