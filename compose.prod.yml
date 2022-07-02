@@ -49,9 +49,14 @@ services:
       - 443:443
     links:
       - auth
+      - client
   
   some-rabbit:
     image: rabbitmq:3-management
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 30s
+      timeout: 10s
     ports:
       - 15672:15672
       - 5672
