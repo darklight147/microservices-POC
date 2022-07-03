@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import jwtService from '../services/jwt.service';
+import { isTokenExpired } from '../utils/istoken-expired';
 
 export const currentUser = async (
 	req: Request,
@@ -13,12 +14,14 @@ export const currentUser = async (
 	if (token) {
 		let currentUser = jwtService.verify(token);
 
-		if (!currentUser && req.session!.refresh) {
-			const refreshedToken = await jwtService.refresh(req);
+		if (!currentUser && isTokenExpired(token)) {
+			if (req.session!.refresh) {
+				const newAccessToken = await jwtService.refresh(req);
 
-			req.session!.jwt = refreshedToken;
+				req.session!.jwt = newAccessToken;
 
-			currentUser = jwtService.verify(refreshedToken);
+				currentUser = jwtService.verify(newAccessToken);
+			}
 		}
 
 		req.currentUser = currentUser;
