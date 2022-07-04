@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import { envVars } from '../config/env.config';
 import { UnauthorizedException } from '../errors/unauthorized-error';
 import userService from './user.service';
@@ -40,8 +40,8 @@ class JwtService {
 		}
 	}
 
-	public async refresh(req: Request) {
-		const decoded = this.verifyRefreshToken(req.session!.refresh);
+	public async refresh(refreshToken: string) {
+		const decoded = this.verifyRefreshToken(refreshToken);
 
 		if (!decoded) {
 			return null;
@@ -75,6 +75,13 @@ class JwtService {
 		} catch (error: any) {
 			return null;
 		}
+	}
+
+	public isTokenExpired(token: string) {
+		const decoded = jwt.decode(token) as JwtPayload;
+		const exp = (decoded.exp as number) * 1000;
+		const now = Date.now();
+		return now > exp;
 	}
 }
 

@@ -1,6 +1,5 @@
 version: '3.1'
 
-
 services:
   auth:
     build: ./auth
@@ -49,11 +48,14 @@ services:
       - 443:443
     depends_on:
       - auth
-      - expiration
       - client
-  
+
   some-rabbit:
     image: rabbitmq:3-management
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "ping" ]
+      interval: 30s
+      timeout: 10s
     ports:
       - 15672:15672
       - 5672
@@ -61,4 +63,3 @@ services:
     image: redis
     ports:
       - 6379
-  

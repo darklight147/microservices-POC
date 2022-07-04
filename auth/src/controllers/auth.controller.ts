@@ -76,7 +76,7 @@ export class AuthController {
 			const roles = user.roles;
 
 			if (userService.hasRole(user, ROLE.VISITORS)) {
-				throw new UnauthorizedException();
+				throw new BadRequestException('User with this username already exists');
 			}
 
 			roles.push(visitorRole);
