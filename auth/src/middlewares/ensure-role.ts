@@ -1,13 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
+import { ForbiddenException } from '../errors/forbidden-error';
 import { UnauthorizedException } from '../errors/unauthorized-error';
 import { ROLE } from '../services/jwt.service';
 
-export const ensureRole = (role: ROLE) => {
+export const ensureRole = (roles: ROLE[]) => {
 	return (req: Request, res: Response, next: NextFunction) => {
-		if (req.currentUser.roles.indexOf(role) === -1) {
+		if (!req.currentUser) {
 			throw new UnauthorizedException();
 		}
 
+		const userRoles = req.currentUser.roles.map((role: any) => role.name);
+		const hasRole = roles.some((role) => userRoles.includes(role));
+		if (!hasRole) {
+			throw new ForbiddenException("You don't have permission to do this");
+		}
 		next();
 	};
 };

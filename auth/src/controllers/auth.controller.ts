@@ -6,6 +6,9 @@ import passwordService from '../services/password.service';
 import roleService from '../services/role.service';
 import userService, { UserDoc } from '../services/user.service';
 import { appendSession } from '../utils/append-session';
+import { StatusCodes } from 'http-status-codes';
+import { BadRequestException } from '../errors/bad-request-error';
+import { ROLE } from '../services/jwt.service';
 
 export class AuthController {
 	private static GUEST_EXPIRATION_WINDOW: number = 15; // Minutes
@@ -16,11 +19,11 @@ export class AuthController {
 		const user = await userService.findByUsername(username);
 
 		if (!user) {
-			throw new UnauthorizedException();
+			throw new BadRequestException('Wrong username or password');
 		}
 
 		if (!(await passwordService.compare(user.password, password))) {
-			throw new UnauthorizedException();
+			throw new BadRequestException('Wrong username or password');
 		}
 
 		appendSession(req, user);
@@ -34,10 +37,10 @@ export class AuthController {
 		const user = await userService.findByUsername(username);
 
 		if (user) {
-			throw new UnauthorizedException();
+			throw new BadRequestException('User with this username already exists');
 		}
 
-		const roles = [await roleService.findByName('admin')] as any;
+		const roles = [await roleService.findByName(ROLE.ADMIN)] as any;
 
 		const createdUser = await userService.create({
 			password: await passwordService.hash(password),
@@ -59,7 +62,7 @@ export class AuthController {
 	public logout(req: Request, res: Response) {
 		req.session = undefined;
 
-		res.status(204).send();
+		res.status(StatusCodes.NO_CONTENT).send();
 	}
 
 	public async signupVisitor(req: Request, res: Response) {
@@ -67,12 +70,12 @@ export class AuthController {
 
 		const user = await userService.findByUsername(username);
 
-		const visitorRole = (await roleService.findByName('visitors')) as any;
+		const visitorRole = (await roleService.findByName(ROLE.VISITORS)) as any;
 
 		if (user) {
 			const roles = user.roles;
 
-			if (userService.hasRole(user, 'visitors')) {
+			if (userService.hasRole(user, ROLE.VISITORS)) {
 				throw new UnauthorizedException();
 			}
 
@@ -114,7 +117,7 @@ export class AuthController {
 			throw new UnauthorizedException();
 		}
 		await user.remove();
-		res.status(204).send();
+		res.status(StatusCodes.NO_CONTENT).send();
 	}
 
 	public async updateMe(req: Request, res: Response) {

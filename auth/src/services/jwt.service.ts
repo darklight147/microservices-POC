@@ -4,7 +4,10 @@ import { envVars } from '../config/env.config';
 import { UnauthorizedException } from '../errors/unauthorized-error';
 import userService from './user.service';
 
-export type ROLE = 'admin' | 'visitors';
+export enum ROLE {
+	ADMIN = 'admin',
+	VISITORS = 'visitors',
+}
 
 interface Payload {
 	username: string;
