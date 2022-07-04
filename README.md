@@ -5,25 +5,25 @@
 - Get CurrentUser
 
 ```bash
-GET /api/auth/me
+curl -X GET /api/auth/me
 ```
 
 - Login
 
 ```bash
-POST -d {"username": "test@test.com", "password": "123456"} /api/auth/login
+curl -X POST -d {"username": "test@test.com", "password": "123456"} /api/auth/login
 ```
 
 - Signup
 
 ```bash
-POST -d {"username": "test@test.com", "password": "123456"} /api/auth/signup
+curl -X POST -d {"username": "test@test.com", "password": "123456"} /api/auth/signup
 ```
 
 - Logout
 
 ```bash
-GET /api/auth/logout
+curl -X GET /api/auth/logout
 ```
 
 ## Expiration Service [![CI for Expiration Service](https://github.com/darklight147/microservices-POC/actions/workflows/expiration-ci.yml/badge.svg)](https://github.com/darklight147/microservices-POC/actions/workflows/expiration-ci.yml)
