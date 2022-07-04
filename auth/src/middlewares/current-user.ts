@@ -18,9 +18,11 @@ export const currentUser = async (
 			if (req.session!.refresh) {
 				const newAccessToken = await jwtService.refresh(req);
 
-				req.session!.jwt = newAccessToken;
+				req.session!.jwt = newAccessToken || null;
 
-				currentUser = jwtService.verify(newAccessToken);
+				if (newAccessToken) {
+					currentUser = jwtService.verify(newAccessToken);
+				}
 			}
 		}
 

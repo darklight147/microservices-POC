@@ -44,13 +44,13 @@ class JwtService {
 		const decoded = this.verifyRefreshToken(req.session!.refresh);
 
 		if (!decoded) {
-			throw new UnauthorizedException();
+			return null;
 		}
 
 		const user = await userService.findById(decoded.id);
 
 		if (!user) {
-			throw new UnauthorizedException();
+			return null;
 		}
 
 		return this.sign({
