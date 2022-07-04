@@ -9,7 +9,7 @@ export const ensureRole = (roles: ROLE[]) => {
 			throw new UnauthorizedException();
 		}
 
-		const userRoles = req.currentUser.roles.map((role: any) => role.name);
+		const userRoles = req.currentUser.roles;
 		const hasRole = roles.some((role) => userRoles.includes(role));
 		if (!hasRole) {
 			throw new ForbiddenException("You don't have permission to do this");
