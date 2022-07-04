@@ -9,7 +9,15 @@ function MyApp({ Component, pageProps, currentUser }) {
 MyApp.getInitialProps = async (appContext) => {
 	const client = buildClient(appContext.ctx);
 
-	const { data } = await client.get('/api/auth/me');
+	const response = await client.get('/api/auth/me');
+
+	// Forward Cookies from response to client
+	const cookies = response.headers['set-cookie'];
+	if (cookies) {
+		cookies.forEach((cookie) => {
+			appContext.ctx.res.setHeader('Set-Cookie', cookie);
+		});
+	}
 
 	let pageProps = {};
 
