@@ -1,6 +1,5 @@
 version: '3.1'
 
-
 services:
   auth:
     image: quasimodo147/auth-svc:latest
@@ -50,11 +49,11 @@ services:
     links:
       - auth
       - client
-  
+
   some-rabbit:
     image: rabbitmq:3-management
     healthcheck:
-      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      test: [ "CMD", "rabbitmq-diagnostics", "ping" ]
       interval: 30s
       timeout: 10s
     ports:
@@ -64,4 +63,3 @@ services:
     image: redis
     ports:
       - 6379
-  
