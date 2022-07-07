@@ -13,6 +13,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { GuestUserExpiredListener } from './events/consumers/GuestUserExpiredListener';
 import rabbitmqWrappers from './config/rabbitmq.wrappers';
+import { currentUser } from '@quasimodo147/common';
 
 async function start() {
 	checkVars();
@@ -64,6 +65,8 @@ async function start() {
 			sameSite: 'lax',
 		})
 	);
+	app.use(currentUser);
+
 	/**
 	 * Map routes
 	 */

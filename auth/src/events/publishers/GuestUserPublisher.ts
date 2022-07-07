@@ -1,5 +1,5 @@
 import { ExchangePublisher } from './ExchangePublisherAbstract';
-import { Publisher } from './PublisherAbstract';
+import { GuestQueues } from '@quasimodo147/common';
 
 interface Payload {
 	userId: string;
@@ -7,6 +7,6 @@ interface Payload {
 }
 
 export class GuestUserExpirePublisher extends ExchangePublisher<Payload> {
-	queueName: string = 'expire:guest-user';
-	exchangeName: string = 'expire:guest-user';
+	queueName: string = GuestQueues.EXPIRE_GUEST_USER;
+	exchangeName: string = GuestQueues.EXPIRE_GUEST_USER;
 }

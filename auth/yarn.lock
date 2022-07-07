@@ -47,6 +47,17 @@
   resolved "https://registry.yarnpkg.com/@phc/format/-/format-1.0.0.tgz#b5627003b3216dc4362125b13f48a4daa76680e4"
   integrity sha512-m7X9U6BG2+J+R1lSOdCiITLLrxm+cWlNI3HUFA92oLO77ObGNzaKdh8pMLqdZcshtkKuV84olNNXDfMc4FezBQ==
 
+"@quasimodo147/common@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@quasimodo147/common/-/common-1.0.5.tgz#20b5cefc2687fa9c48bb55dbda0b9c84d3e54d70"
+  integrity sha512-OCcNVaj6D8pApcmB195d26iq3qH3LtkF8c7du2d69zqARGqZZi0dXKDcVATnVl0BNDH4WTMVoEqMJBiqKOcpvQ==
+  dependencies:
+    cookie-session "^2.0.0"
+    express "^4.18.1"
+    express-validator "^6.14.2"
+    http-status-codes "^2.2.0"
+    jsonwebtoken "^8.5.1"
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"

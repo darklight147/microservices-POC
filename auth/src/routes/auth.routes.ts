@@ -1,13 +1,11 @@
 import { Router } from 'express';
 import authController from '../controllers/auth.controller';
-import { currentUser } from '../middlewares/current-user';
-import { ensureAuthenticated } from '../middlewares/ensure-authenticated';
-import { validateRequest } from '../middlewares/validate-request';
 import {
 	loginValidator,
 	signupValidator,
 	updateValidator,
 } from '../validators/validators';
+import { validateRequest, ensureAuthenticated } from '@quasimodo147/common';
 
 const router = Router();
 
@@ -19,7 +17,7 @@ router.post(
 	validateRequest,
 	authController.signupVisitor
 );
-router.get('/me', currentUser, authController.me);
+router.get('/me', authController.me);
 router.get('/logout', authController.logout);
 
 /**
@@ -28,12 +26,11 @@ router.get('/logout', authController.logout);
 
 router.put(
 	'/me',
-	currentUser,
 	ensureAuthenticated,
 	updateValidator,
 	validateRequest,
 	authController.updateMe
 );
-router.delete('/me', currentUser, ensureAuthenticated, authController.deleteMe);
+router.delete('/me', ensureAuthenticated, authController.deleteMe);
 
 export { router as authRouter };
