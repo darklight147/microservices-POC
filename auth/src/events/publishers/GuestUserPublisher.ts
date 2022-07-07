@@ -1,4 +1,4 @@
-import { ExchangePublisher } from './ExchangePublisherAbstract';
+import { ExchangePublisher } from '@quasimodo147/common';
 import { GuestQueues } from '@quasimodo147/common';
 
 interface Payload {

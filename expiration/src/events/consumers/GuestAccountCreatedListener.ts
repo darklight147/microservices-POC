@@ -1,6 +1,6 @@
 import { ConsumeMessage, Message } from 'amqplib';
 import { expirationQueue } from '../../queues/expiration-queue';
-import { Listener } from './ListenerAbstract';
+import { Listener, GuestQueues } from '@quasimodo147/common';
 
 interface Payload {
 	userId: string;
@@ -8,7 +8,7 @@ interface Payload {
 }
 
 export class GuestAccountCreatedListener extends Listener {
-	queueName: string = 'expire:guest-user';
+	queueName: string = GuestQueues.EXPIRE_GUEST_USER;
 
 	onMessage = async (msg: ConsumeMessage | null) => {
 		try {
