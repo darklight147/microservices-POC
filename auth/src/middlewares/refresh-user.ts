@@ -34,12 +34,14 @@ export const refreshUser = async (
 
 		if (!user) return next();
 
-		req.currentUser = user;
-		req.session!.jwt = jwtService.sign({
+		const newToken = jwtService.sign({
 			id: user.id,
 			roles: user.roles.map((role) => role.name),
 			username: user.username,
 		});
+
+		req.currentUser = jwtService.verify(newToken);
+		req.session!.jwt = newToken;
 	} catch (error: any) {}
 
 	next();
