@@ -3,9 +3,9 @@ import { CustomError } from '@quasimodo147/common';
 import { StatusCodes } from 'http-status-codes';
 
 export const errorHandler: ErrorRequestHandler = (error, req, res, next) => {
-	if (error instanceof CustomError) {
+	if (error instanceof CustomError)
 		res.status(error.statusCode).json(error.serializeError());
-	} else {
+	else {
 		res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
 			errors: [
 				{

@@ -9,9 +9,8 @@ class RabbitMqWrapper {
 	}
 
 	get connection() {
-		if (!this._connection) {
+		if (!this._connection)
 			throw new Error('Must initialize connection before acceting connection');
-		}
 
 		return this._connection;
 	}

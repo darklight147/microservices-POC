@@ -12,8 +12,6 @@ export const envVars = {
 
 export const checkVars = () => {
 	for (const [key, value] of Object.entries(envVars)) {
-		if (!value) {
-			throw new Error('Missing Value for ' + key);
-		}
+		if (!value) throw new Error('Missing Value for ' + key);
 	}
 };

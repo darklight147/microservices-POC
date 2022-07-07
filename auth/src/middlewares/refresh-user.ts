@@ -26,9 +26,7 @@ export const refreshUser = async (
 	try {
 		const payload = jwtService.verifyRefreshToken(refresh);
 
-		if (!payload) {
-			return next();
-		}
+		if (!payload) return next();
 
 		const user = await userService.findById(payload.id);
 

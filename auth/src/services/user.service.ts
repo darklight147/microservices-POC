@@ -34,9 +34,7 @@ class UserService {
 
 	public hasRole(user: UserDoc, givenRole: ROLE) {
 		for (const role of user.roles.map((role) => role.name)) {
-			if (role === givenRole) {
-				return true;
-			}
+			if (role === givenRole) return true;
 		}
 
 		return false;

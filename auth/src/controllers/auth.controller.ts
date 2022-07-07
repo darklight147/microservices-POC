@@ -18,13 +18,10 @@ export class AuthController {
 
 		const user = await userService.findByUsername(username);
 
-		if (!user) {
-			throw new BadRequestException('Wrong username or password');
-		}
+		if (!user) throw new BadRequestException('Wrong username or password');
 
-		if (!(await passwordService.compare(user.password, password))) {
+		if (!(await passwordService.compare(user.password, password)))
 			throw new BadRequestException('Wrong username or password');
-		}
 
 		appendSession(req, user);
 
@@ -36,9 +33,8 @@ export class AuthController {
 
 		const user = await userService.findByUsername(username);
 
-		if (user) {
+		if (user)
 			throw new BadRequestException('User with this username already exists');
-		}
 
 		const roles = [await roleService.findByName(ROLE.ADMIN)] as any;
 
@@ -113,9 +109,8 @@ export class AuthController {
 	public async deleteMe(req: Request, res: Response) {
 		const { id } = req.currentUser;
 		const user = await userService.findById(id);
-		if (!user) {
-			throw new UnauthorizedException();
-		}
+		if (!user) throw new UnauthorizedException();
+
 		await user.remove();
 		res.status(StatusCodes.NO_CONTENT).send();
 	}
@@ -123,9 +118,9 @@ export class AuthController {
 	public async updateMe(req: Request, res: Response) {
 		const { id } = req.currentUser;
 		const user = await userService.findById(id);
-		if (!user) {
-			throw new UnauthorizedException();
-		}
+
+		if (!user) throw new UnauthorizedException();
+
 		const newUser = await userService.update(user.id, req.body);
 		res.status(200).json(newUser);
 	}
