@@ -14,7 +14,7 @@ export class GuestUserExpiredListener extends Listener {
 			if (data) {
 				const user = await userService.findById(data.userId);
 
-				await user.delete();
+				await user.remove();
 
 				this.channel.ack(msg);
 				return;

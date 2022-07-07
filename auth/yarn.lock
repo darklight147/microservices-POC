@@ -48,9 +48,9 @@
   integrity sha512-m7X9U6BG2+J+R1lSOdCiITLLrxm+cWlNI3HUFA92oLO77ObGNzaKdh8pMLqdZcshtkKuV84olNNXDfMc4FezBQ==
 
 "@quasimodo147/common@^1.0.12":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@quasimodo147/common/-/common-1.0.12.tgz#3485a455007df3bf384b0abb0b679b4246ffb6af"
-  integrity sha512-rWoKxwqtrUo8z5eNUlm22z4WqNgvc1/tML+6gsPoRuCRu2mh6y4jvHoflaa55WvOp0703eVrEVADAfpKqxEPHg==
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/@quasimodo147/common/-/common-1.0.13.tgz#b5b00d8258655222281dc1e2aa1174a77c951710"
+  integrity sha512-OP0kt0I/9RzvdogjJ4FXr32SNyjSnrzOuhNBGTR88Yh3v8rY+9nqLdfyYcNNbgfYQVOyBievh79g1NoTAGmbkQ==
   dependencies:
     amqplib "^0.10.0"
     cookie-session "^2.0.0"
