@@ -2,6 +2,8 @@ import { LogQueues, Listener } from '@quasimodo147/common';
 
 import pino from 'pino';
 
+import { ConsumeMessage } from 'amqplib';
+
 interface Payload {
 	message: string;
 	level: string;
@@ -13,7 +15,16 @@ export class LogListener extends Listener {
 
 	private logger = pino() as any;
 
-	onMessage = async (payload: Payload) => {
-		this.logger[payload.level](payload.message, payload.data);
+	onMessage = async (payload: ConsumeMessage | null) => {
+		if (!payload) return;
+		try {
+			const { message, level, data } = JSON.parse(payload.content.toString());
+
+			this.logger[level](message, data);
+		} catch (error) {
+			console.log(payload.content.toString());
+		}
+
+		this.channel.ack(payload);
 	};
 }
