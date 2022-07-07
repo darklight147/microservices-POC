@@ -9,6 +9,7 @@ import { appendSession } from '../utils/append-session';
 import { StatusCodes } from 'http-status-codes';
 import { BadRequestException } from '@quasimodo147/common';
 import { ROLE } from '@quasimodo147/common';
+import log from '../events/publishers/LogPublisher';
 
 export class AuthController {
 	private static GUEST_EXPIRATION_WINDOW: number = 15; // Minutes
@@ -24,6 +25,8 @@ export class AuthController {
 			throw new BadRequestException('Wrong username or password');
 
 		appendSession(req, user);
+
+		log.info(`User ${user.username} logged in`);
 
 		res.status(200).json(user);
 	}
@@ -59,6 +62,8 @@ export class AuthController {
 
 	public logout(req: Request, res: Response) {
 		req.session = undefined;
+
+		log.info(`User ${req.currentUser.username} logged out`);
 
 		res.status(StatusCodes.NO_CONTENT).send();
 	}
@@ -108,6 +113,12 @@ export class AuthController {
 			expiresAt: expirationDate.toISOString(),
 		});
 
+		log.info(`Temp User ${createdUser.username} created`, createdUser);
+
+		log.info(
+			`Temp User ${createdUser.username} expires at ${expirationDate}`,
+		);
+
 		res.status(200).json(createdUser);
 	}
 
@@ -117,6 +128,9 @@ export class AuthController {
 		if (!user) throw new UnauthorizedException();
 
 		await user.remove();
+
+		log.info(`User ${user.username} deleted`, user);
+
 		res.status(StatusCodes.NO_CONTENT).send();
 	}
 
@@ -127,6 +141,8 @@ export class AuthController {
 		if (!user) throw new UnauthorizedException();
 
 		const newUser = await userService.update(user.id, req.body);
+
+		log.info(`User ${user.username} updated`, user);
 		res.status(200).json(newUser);
 	}
 }
