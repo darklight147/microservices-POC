@@ -34,7 +34,9 @@ export class AuthController {
 		const user = await userService.findByUsername(username);
 
 		if (user)
-			throw new BadRequestException('User with this username already exists');
+			throw new BadRequestException(
+				'User with this username already exists',
+			);
 
 		const roles = [await roleService.findByName(ROLE.ADMIN)] as any;
 
@@ -72,7 +74,9 @@ export class AuthController {
 			const roles = user.roles;
 
 			if (userService.hasRole(user, ROLE.VISITOR)) {
-				throw new BadRequestException('User with this username already exists');
+				throw new BadRequestException(
+					'User with this username already exists',
+				);
 			}
 
 			roles.push(visitorRole);
@@ -95,7 +99,8 @@ export class AuthController {
 		const expirationDate = new Date();
 
 		expirationDate.setMinutes(
-			expirationDate.getMinutes() + AuthController.GUEST_EXPIRATION_WINDOW
+			expirationDate.getMinutes() +
+				AuthController.GUEST_EXPIRATION_WINDOW,
 		);
 
 		new GuestUserExpirePublisher(rabbitmqWrappers.connection).publish({

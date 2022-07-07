@@ -47,7 +47,7 @@ class UserService {
 				username: attrs.username,
 				password: await passwordService.hash(attrs.password),
 			},
-			{ new: true }
+			{ new: true },
 		)) as UserDoc;
 	}
 }

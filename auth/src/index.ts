@@ -53,7 +53,7 @@ async function start() {
 		cors({
 			credentials: true,
 			origin: true,
-		})
+		}),
 	);
 
 	app.use(express.json({ limit: '10mb' }));
@@ -63,7 +63,7 @@ async function start() {
 			httpOnly: true,
 			name: 'session:store',
 			sameSite: 'lax',
-		})
+		}),
 	);
 	app.use(currentUser);
 	app.use(refreshUser);
@@ -82,7 +82,7 @@ async function start() {
 	app.use(errorHandler);
 
 	app.listen(envVars.PORT, () =>
-		console.log('Listening', `http://localhost:${envVars.PORT}`)
+		console.log('Listening', `http://localhost:${envVars.PORT}`),
 	);
 }
 

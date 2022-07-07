@@ -5,7 +5,7 @@ import userService from '../services/user.service';
 export const refreshUser = async (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	if (req.currentUser) {
 		return next();

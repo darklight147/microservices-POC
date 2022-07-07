@@ -12,7 +12,7 @@ const roleSchema = new mongoose.Schema(
 				delete ret.__v;
 			},
 		},
-	}
+	},
 );
 
 export const Role = mongoose.model('Role', roleSchema);

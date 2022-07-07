@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
 				delete ret.__v;
 			},
 		},
-	}
+	},
 );
 
 userSchema.set('versionKey', '__v');

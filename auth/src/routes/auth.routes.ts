@@ -15,7 +15,7 @@ router.post(
 	'/signup/visitor',
 	signupValidator,
 	validateRequest,
-	authController.signupVisitor
+	authController.signupVisitor,
 );
 router.get('/me', authController.me);
 router.get('/logout', authController.logout);
@@ -29,7 +29,7 @@ router.put(
 	ensureAuthenticated,
 	updateValidator,
 	validateRequest,
-	authController.updateMe
+	authController.updateMe,
 );
 router.delete('/me', ensureAuthenticated, authController.deleteMe);
 
