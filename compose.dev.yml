@@ -50,6 +50,16 @@ services:
       - auth
       - client
 
+  logger:
+    build: ./logger
+    environment:
+      RABBIT_URL: amqp://some-rabbit
+    depends_on:
+      - some-redis
+      - some-rabbit
+    restart: unless-stopped
+
+
   some-rabbit:
     image: rabbitmq:3-management
     healthcheck:
