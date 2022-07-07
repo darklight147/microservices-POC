@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import jwtService from '../services/jwt.service';
+import { jwtService } from '@quasimodo147/common';
 import { UserDoc } from '../services/user.service';
 import { addDays } from './add-days';
 

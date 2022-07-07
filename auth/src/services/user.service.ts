@@ -2,7 +2,7 @@ import { User } from '../models/User';
 import { Role } from '../models/Role';
 import { Document } from 'mongoose';
 import { RoleDoc } from './role.service';
-import { ROLE } from './jwt.service';
+import { ROLE } from '@quasimodo147/common';
 import passwordService from './password.service';
 
 interface UserAttrs {

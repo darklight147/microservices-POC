@@ -1,19 +1,19 @@
 import 'express-async-errors';
 import express from 'express';
 import { checkVars, envVars } from './config/env.config';
-import { NotFoundException } from './errors/notfound-error';
 import { authRouter } from './routes/auth.routes';
 import { healthRrouter } from './routes/health.routes';
 import { errorHandler } from './controllers/error.controller';
 import mongoose from 'mongoose';
 import cookieSession from 'cookie-session';
 import roleService from './services/role.service';
-import { ROLE } from './services/jwt.service';
 import helmet from 'helmet';
 import cors from 'cors';
 import { GuestUserExpiredListener } from './events/consumers/GuestUserExpiredListener';
 import rabbitmqWrappers from './config/rabbitmq.wrappers';
 import { currentUser } from '@quasimodo147/common';
+import { refreshUser } from './middlewares/refresh-user';
+import { ROLE, NotFoundException } from '@quasimodo147/common';
 
 async function start() {
 	checkVars();
@@ -66,6 +66,7 @@ async function start() {
 		})
 	);
 	app.use(currentUser);
+	app.use(refreshUser);
 
 	/**
 	 * Map routes

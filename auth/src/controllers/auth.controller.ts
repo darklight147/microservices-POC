@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
 import rabbitmqWrappers from '../config/rabbitmq.wrappers';
-import { UnauthorizedException } from '../errors/unauthorized-error';
+import { UnauthorizedException } from '@quasimodo147/common';
 import { GuestUserExpirePublisher } from '../events/publishers/GuestUserPublisher';
 import passwordService from '../services/password.service';
 import roleService from '../services/role.service';
 import userService, { UserDoc } from '../services/user.service';
 import { appendSession } from '../utils/append-session';
 import { StatusCodes } from 'http-status-codes';
-import { BadRequestException } from '../errors/bad-request-error';
-import { ROLE } from '../services/jwt.service';
+import { BadRequestException } from '@quasimodo147/common';
+import { ROLE } from '@quasimodo147/common';
 
 export class AuthController {
 	private static GUEST_EXPIRATION_WINDOW: number = 15; // Minutes
@@ -70,12 +70,12 @@ export class AuthController {
 
 		const user = await userService.findByUsername(username);
 
-		const visitorRole = (await roleService.findByName(ROLE.VISITORS)) as any;
+		const visitorRole = (await roleService.findByName(ROLE.VISITOR)) as any;
 
 		if (user) {
 			const roles = user.roles;
 
-			if (userService.hasRole(user, ROLE.VISITORS)) {
+			if (userService.hasRole(user, ROLE.VISITOR)) {
 				throw new BadRequestException('User with this username already exists');
 			}
 

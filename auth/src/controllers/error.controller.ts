@@ -1,5 +1,5 @@
 import { ErrorRequestHandler } from 'express';
-import { CustomError } from '../errors/custom-error';
+import { CustomError } from '@quasimodo147/common';
 import { StatusCodes } from 'http-status-codes';
 
 export const errorHandler: ErrorRequestHandler = (error, req, res, next) => {

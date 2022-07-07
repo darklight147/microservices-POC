@@ -1,7 +1,7 @@
 import { Role } from '../models/Role';
 import { User } from '../models/User';
 import { Document } from 'mongoose';
-import { ROLE } from './jwt.service';
+import { ROLE } from '@quasimodo147/common';
 
 export interface RoleDoc extends Document {
 	name: string;
