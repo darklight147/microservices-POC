@@ -24,7 +24,7 @@ async function start() {
 	 * DBs seed
 	 */
 
-	const roles = ['admin', 'visitors'] as ROLE[];
+	const roles = ['admin', 'visitor'] as ROLE[];
 
 	for await (const role of roles) {
 		await roleService.createIfNotExists(role);
