@@ -1,6 +1,6 @@
 # WORK IN PROGRESS
 
-## AUTH service [![CI for Auth Service](https://github.com/darklight147/microservices-POC/actions/workflows/auth-ci.yml/badge.svg)](https://github.com/darklight147/microservices-POC/actions/workflows/auth-ci.yml)
+## AUTH service [![CI for Auth Service](https://github.com/darklight147/microservices-POC/actions/workflows/auth-ci.yml/badge.svg)](https://github.com/darklight147/microservices-POC/actions/workflows/auth-ci.yml) [![JWT](https://jwt.io/img/badge-compatible.svg)]
 
 - Get CurrentUser
 
