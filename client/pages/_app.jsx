@@ -1,9 +1,21 @@
 import { buildClient } from '../api/build-client';
 import '../styles/globals.css';
-import niceTry from 'nice-try';
+import Navbar from '../components/navbar';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps, currentUser }) {
-	return <Component {...pageProps} />;
+	return (
+		<div>
+			<Head>
+				<link
+					rel="stylesheet"
+					href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+				/>
+			</Head>
+			<Navbar />
+			<Component {...pageProps} />
+		</div>
+	);
 }
 
 MyApp.getInitialProps = async (appContext) => {

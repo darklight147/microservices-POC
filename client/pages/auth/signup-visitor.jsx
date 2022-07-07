@@ -25,26 +25,46 @@ function SignUpVisitor() {
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
-				<div className="form-group">
-					<label htmlFor="email">Email</label>
-					<input
-						type="email"
-						className="form-control"
-						id="email"
-						placeholder="Enter email"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-					/>
-					<label htmlFor="password">Password</label>
-					<input
-						type="password"
-						className="form-control"
-						id="password"
-						placeholder="Password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-					/>
-					<button type="submit" className="btn btn-primary" value={'Submit'} />
+				<div>
+					<div className="field is-horizontal">
+						<div className="field-label is-normal">
+							<label className="label">Email</label>
+						</div>
+						<div className="field-body">
+							<div className="field">
+								<p className="control">
+									<input
+										className="input"
+										type="email"
+										defaultValue="me@example.com"
+										value={email}
+										onChange={(e) => setEmail(e.target.value)}
+									/>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div className="field is-horizontal">
+						<div className="field-label is-normal">
+							<label className="label">Password</label>
+						</div>
+						<div className="field-body">
+							<div className="field">
+								<p className="control">
+									<input
+										className="input"
+										type="password"
+										placeholder="Recipient password"
+										value={password}
+										onChange={(e) => setPassword(e.target.value)}
+									/>
+								</p>
+							</div>
+						</div>
+					</div>
+					<button className="button is-info" type="submit">
+						Submit
+					</button>
 				</div>
 			</form>
 

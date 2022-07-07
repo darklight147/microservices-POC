@@ -19,7 +19,6 @@ function Hello(props) {
 
 	return (
 		<div>
-			Hello world
 			<form onSubmit={handleSubmit}>
 				<input type="submit" value="Click Here" />
 			</form>
