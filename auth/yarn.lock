@@ -47,10 +47,10 @@
   resolved "https://registry.yarnpkg.com/@phc/format/-/format-1.0.0.tgz#b5627003b3216dc4362125b13f48a4daa76680e4"
   integrity sha512-m7X9U6BG2+J+R1lSOdCiITLLrxm+cWlNI3HUFA92oLO77ObGNzaKdh8pMLqdZcshtkKuV84olNNXDfMc4FezBQ==
 
-"@quasimodo147/common@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@quasimodo147/common/-/common-1.0.5.tgz#20b5cefc2687fa9c48bb55dbda0b9c84d3e54d70"
-  integrity sha512-OCcNVaj6D8pApcmB195d26iq3qH3LtkF8c7du2d69zqARGqZZi0dXKDcVATnVl0BNDH4WTMVoEqMJBiqKOcpvQ==
+"@quasimodo147/common@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@quasimodo147/common/-/common-1.0.8.tgz#77a53c274c28e14fbb6cacad63642eb4c0aefab4"
+  integrity sha512-yJxshOPKg0ZJkY/fSZnInDf74UO/7Zbdx8IsQgJ7oxPrht3IIsnJoeE/SpzOBLgFXHCsb12fkjibMJZltghubw==
   dependencies:
     cookie-session "^2.0.0"
     express "^4.18.1"
