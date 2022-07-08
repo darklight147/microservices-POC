@@ -18,7 +18,7 @@ WORKDIR /app
 COPY package.json .
 COPY package-lock.json .
 
-RUN yarn ci
+RUN npm ci
 
 COPY --from=builder /app/build ./
 
