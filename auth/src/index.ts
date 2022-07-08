@@ -1,19 +1,19 @@
-import 'express-async-errors';
+import { currentUser, NotFoundException, ROLE } from '@quasimodo147/common';
+import cookieSession from 'cookie-session';
+import cors from 'cors';
 import express from 'express';
+import 'express-async-errors';
+import helmet from 'helmet';
+import mongoose from 'mongoose';
 import { checkVars, envVars } from './config/env.config';
+import rabbitmqWrappers from './config/rabbitmq.wrappers';
+import { errorHandler } from './controllers/error.controller';
+import { GuestUserExpiredListener } from './events/consumers/GuestUserExpiredListener';
+import { refreshUser } from './middlewares/refresh-user';
 import { authRouter } from './routes/auth.routes';
 import { healthRrouter } from './routes/health.routes';
-import { errorHandler } from './controllers/error.controller';
-import mongoose from 'mongoose';
-import cookieSession from 'cookie-session';
 import roleService from './services/role.service';
-import helmet from 'helmet';
-import cors from 'cors';
-import { GuestUserExpiredListener } from './events/consumers/GuestUserExpiredListener';
-import rabbitmqWrappers from './config/rabbitmq.wrappers';
-import { currentUser } from '@quasimodo147/common';
-import { refreshUser } from './middlewares/refresh-user';
-import { ROLE, NotFoundException } from '@quasimodo147/common';
+import logger from './utils/logger';
 
 async function start() {
 	checkVars();
@@ -31,6 +31,8 @@ async function start() {
 	}
 
 	await rabbitmqWrappers.connect();
+
+	logger.init();
 
 	/**
 	 * Init Consumers

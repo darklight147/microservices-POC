@@ -9,7 +9,7 @@ import { appendSession } from '../utils/append-session';
 import { StatusCodes } from 'http-status-codes';
 import { BadRequestException } from '@quasimodo147/common';
 import { ROLE } from '@quasimodo147/common';
-import log from '../events/publishers/LogPublisher';
+import log from '../utils/logger';
 
 export class AuthController {
 	private static GUEST_EXPIRATION_WINDOW: number = 15; // Minutes

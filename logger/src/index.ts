@@ -5,6 +5,8 @@ import { LogListener } from './events/consumers/LogListener';
 async function start() {
 	checkVars();
 
+	await rabbitWrapper.connect();
+
 	new LogListener(rabbitWrapper.connection).listen();
 }
 
