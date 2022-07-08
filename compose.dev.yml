@@ -57,6 +57,8 @@ services:
     depends_on:
       - some-redis
       - some-rabbit
+      - auth
+      - expiration
     restart: unless-stopped
 
 
