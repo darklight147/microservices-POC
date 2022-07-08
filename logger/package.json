@@ -12,7 +12,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@quasimodo147/common": "^1.0.15",
+		"@quasimodo147/common": "^1.0.19",
 		"amqplib": "^0.10.0",
 		"pino": "^8.1.0"
 	},

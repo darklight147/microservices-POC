@@ -1,11 +1,5 @@
-import { LogQueues, Publisher } from '@quasimodo147/common';
+import { LogQueues, Publisher, LogQueuePayload } from '@quasimodo147/common';
 
-interface Payload {
-	message: string;
-	level: string;
-	data?: any;
-}
-
-export class LogPublisher extends Publisher<Payload> {
+export class LogPublisher extends Publisher<LogQueuePayload> {
 	queueName = LogQueues.LOG_INFO;
 }

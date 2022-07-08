@@ -1,9 +1,9 @@
-import { Publisher, GuestQueues } from '@quasimodo147/common';
+import {
+	GuestQueues,
+	Publisher,
+	ExpireGuestUserPayload,
+} from '@quasimodo147/common';
 
-interface Payload {
-	userId: string;
-}
-
-export class GuestAccountExpiredPublisher extends Publisher<Payload> {
+export class GuestAccountExpiredPublisher extends Publisher<ExpireGuestUserPayload> {
 	queueName: string = GuestQueues.GUEST_USER_EXPIRED;
 }

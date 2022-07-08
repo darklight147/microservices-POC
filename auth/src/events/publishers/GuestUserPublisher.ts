@@ -1,12 +1,10 @@
-import { ExchangePublisher } from '@quasimodo147/common';
-import { GuestQueues } from '@quasimodo147/common';
+import {
+	ExchangePublisher,
+	GuestQueues,
+	ExpireGuestUserPayload,
+} from '@quasimodo147/common';
 
-interface Payload {
-	userId: string;
-	expiresAt: string;
-}
-
-export class GuestUserExpirePublisher extends ExchangePublisher<Payload> {
+export class GuestUserExpirePublisher extends ExchangePublisher<ExpireGuestUserPayload> {
 	queueName: string = GuestQueues.EXPIRE_GUEST_USER;
 	exchangeName: string = GuestQueues.EXPIRE_GUEST_USER;
 }
