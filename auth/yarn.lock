@@ -74,6 +74,20 @@
     jsonwebtoken "^8.5.1"
     winston "^3.8.1"
 
+"@quasimodo147/common@^1.0.22":
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/@quasimodo147/common/-/common-1.0.22.tgz#ed0e515e09eda21984644183693eb0c99e9b3356"
+  integrity sha512-qYlVEm54+8Mv1cmO/eBjgCfxteZ74uhvIrhExCBItPt98Z+bFYxsgDbIt1+NLmVVtfAdYbA5nT9O4PS8tYihXw==
+  dependencies:
+    "@quasimodo147/common" "^1.0.19"
+    amqplib "^0.10.0"
+    cookie-session "^2.0.0"
+    express "^4.18.1"
+    express-validator "^6.14.2"
+    http-status-codes "^2.2.0"
+    jsonwebtoken "^8.5.1"
+    winston "^3.8.1"
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"

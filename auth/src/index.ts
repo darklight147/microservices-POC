@@ -1,4 +1,9 @@
-import { currentUser, NotFoundException, ROLE } from '@quasimodo147/common';
+import {
+	currentUser,
+	log,
+	NotFoundException,
+	ROLE,
+} from '@quasimodo147/common';
 import cookieSession from 'cookie-session';
 import cors from 'cors';
 import express from 'express';
@@ -13,7 +18,6 @@ import { refreshUser } from './middlewares/refresh-user';
 import { authRouter } from './routes/auth.routes';
 import { healthRrouter } from './routes/health.routes';
 import roleService from './services/role.service';
-import logger from './utils/logger';
 
 async function start() {
 	checkVars();
@@ -32,7 +36,7 @@ async function start() {
 
 	await rabbitmqWrappers.connect();
 
-	logger.init();
+	log.init(rabbitmqWrappers.connection);
 
 	/**
 	 * Init Consumers

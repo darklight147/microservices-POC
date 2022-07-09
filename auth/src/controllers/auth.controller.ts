@@ -1,15 +1,17 @@
+import {
+	BadRequestException,
+	log,
+	ROLE,
+	UnauthorizedException,
+} from '@quasimodo147/common';
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import rabbitmqWrappers from '../config/rabbitmq.wrappers';
-import { UnauthorizedException } from '@quasimodo147/common';
 import { GuestUserExpirePublisher } from '../events/publishers/GuestUserPublisher';
 import passwordService from '../services/password.service';
 import roleService from '../services/role.service';
-import userService, { UserDoc } from '../services/user.service';
+import userService from '../services/user.service';
 import { appendSession } from '../utils/append-session';
-import { StatusCodes } from 'http-status-codes';
-import { BadRequestException } from '@quasimodo147/common';
-import { ROLE } from '@quasimodo147/common';
-import log from '../utils/logger';
 
 export class AuthController {
 	private static GUEST_EXPIRATION_WINDOW: number = 15; // Minutes

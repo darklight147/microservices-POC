@@ -1,9 +1,7 @@
-import { GuestQueues } from '@quasimodo147/common';
-import { ConsumeMessage, Message } from 'amqplib';
+import { GuestQueues, Listener, log } from '@quasimodo147/common';
+import { ConsumeMessage } from 'amqplib';
 import userService from '../../services/user.service';
 import { parseMessage } from '../../utils/parse-message';
-import { Listener } from '@quasimodo147/common';
-import log from '../../utils/logger';
 
 export class GuestUserExpiredListener extends Listener {
 	queueName: string = GuestQueues.GUEST_USER_EXPIRED;
