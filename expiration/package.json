@@ -18,7 +18,7 @@
 		"build": "tsc -p ."
 	},
 	"dependencies": {
-		"@quasimodo147/common": "^1.0.19",
+		"@quasimodo147/common": "^1.0.22",
 		"amqplib": "^0.10.0",
 		"bull": "^4.8.4",
 		"dotenv": "^16.0.1"

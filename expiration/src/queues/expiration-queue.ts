@@ -1,3 +1,4 @@
+import { log } from '@quasimodo147/common';
 import Queue from 'bull';
 import { envVars } from '../config/env.config';
 import rabbitmqWrapper from '../config/rabbitmq.wrapper';
@@ -14,7 +15,7 @@ export const expirationQueue = new Queue<Payload>('expiration:user', {
 });
 
 expirationQueue.process(async (job) => {
-	console.log('processing expiration queue');
+	log.info(`User ${job.data.userId} expired, publishing back to auth-svc`);
 
 	new GuestAccountExpiredPublisher(rabbitmqWrapper.connection).publish({
 		userId: job.data.userId,

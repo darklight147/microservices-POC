@@ -2,6 +2,7 @@ import {
 	GuestQueues,
 	Listener,
 	ExpireGuestUserPayload,
+	log,
 } from '@quasimodo147/common';
 import { ConsumeMessage, Message } from 'amqplib';
 import { expirationQueue } from '../../queues/expiration-queue';
@@ -22,12 +23,20 @@ export class GuestAccountCreatedListener extends Listener {
 				);
 
 				this.channel.ack(msg as Message);
+
+				log.info(
+					`Expiring guest user ${data.userId} in ${
+						(new Date(data.expiresAt).getTime() - Date.now()) / 1000
+					} s`
+				);
 			} catch (error: any) {
 				console.log(error.message);
+				log.error(error.message);
 				this.channel.nack(msg as Message, false, true);
 			}
 		} catch (error: any) {
 			console.log(error.message);
+			log.error(error.message);
 			this.channel.nack(msg as Message, false, false);
 		}
 	};
