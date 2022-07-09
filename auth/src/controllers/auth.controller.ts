@@ -23,7 +23,7 @@ export class AuthController {
 
 		if (!user) throw new BadRequestException('Wrong username or password');
 
-		if (!(await passwordService.compare(user.password, password)))
+		if ((await passwordService.compare(user.password, password)) === false)
 			throw new BadRequestException('Wrong username or password');
 
 		appendSession(req, user);
@@ -65,7 +65,8 @@ export class AuthController {
 	public logout(req: Request, res: Response) {
 		req.session = undefined;
 
-		log.info(`User ${req.currentUser.username} logged out`);
+		if (req.currentUser)
+			log.info(`User ${req.currentUser.username} logged out`);
 
 		res.status(StatusCodes.NO_CONTENT).send();
 	}
@@ -80,11 +81,10 @@ export class AuthController {
 		if (user) {
 			const roles = user.roles;
 
-			if (userService.hasRole(user, ROLE.VISITOR)) {
+			if (userService.hasRole(user, ROLE.VISITOR))
 				throw new BadRequestException(
 					'User with this username already exists',
 				);
-			}
 
 			roles.push(visitorRole);
 
