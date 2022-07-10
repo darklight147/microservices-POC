@@ -7,15 +7,11 @@ export const refreshUser = async (
 	res: Response,
 	next: NextFunction,
 ) => {
-	if (req.currentUser) {
-		return next();
-	}
+	if (req.currentUser) return next();
 
 	const { jwt, refresh } = req.session!;
 
-	if (!refresh) {
-		return next();
-	}
+	if (!refresh) return next();
 
 	if (!jwtService.isTokenExpired(jwt)) return next();
 
