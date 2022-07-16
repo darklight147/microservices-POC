@@ -24,7 +24,7 @@
 		"typescript": "^4.7.4"
 	},
 	"dependencies": {
-		"@quasimodo147/common": "^1.0.22",
+		"@quasimodo147/common": "^1.0.25",
 		"amqplib": "^0.10.0",
 		"argon2": "^0.28.5",
 		"cookie-session": "^2.0.0",

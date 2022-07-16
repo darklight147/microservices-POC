@@ -3,14 +3,14 @@ import { jwtService } from '@quasimodo147/common';
 import { UserDoc } from '../services/user.service';
 import { addDays } from './add-days';
 
-export const appendSession = (req: Request, user: UserDoc) => {
+export const appendSession = async (req: Request, user: UserDoc) => {
 	req.session = {
-		jwt: jwtService.sign({
+		jwt: await jwtService.sign({
 			id: user.id,
 			username: user.username,
 			roles: user.roles.map((role) => role.name),
 		}),
-		refresh: jwtService.signRefresh({
+		refresh: await jwtService.signRefresh({
 			id: user.id,
 		}),
 	};

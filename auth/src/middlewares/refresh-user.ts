@@ -20,7 +20,7 @@ export const refreshUser = async (
 	 */
 
 	try {
-		const payload = jwtService.verifyRefreshToken(refresh);
+		const payload = await jwtService.verifyRefreshToken(refresh);
 
 		if (!payload) return next();
 
@@ -28,13 +28,15 @@ export const refreshUser = async (
 
 		if (!user) return next();
 
-		const newToken = jwtService.sign({
+		const newToken = await jwtService.sign({
 			id: user.id,
 			roles: user.roles.map((role) => role.name),
 			username: user.username,
 		});
 
-		req.currentUser = jwtService.verify(newToken);
+		if (!newToken) return next();
+
+		req.currentUser = await jwtService.verify(newToken);
 		req.session!.jwt = newToken;
 	} catch (error: any) {}
 

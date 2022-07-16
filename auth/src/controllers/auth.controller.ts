@@ -26,7 +26,7 @@ export class AuthController {
 		if ((await passwordService.compare(user.password, password)) === false)
 			throw new BadRequestException('Wrong username or password');
 
-		appendSession(req, user);
+		await appendSession(req, user);
 
 		log.info(`User ${user.username} logged in`);
 
@@ -51,7 +51,7 @@ export class AuthController {
 			roles,
 		});
 
-		appendSession(req, createdUser);
+		await appendSession(req, createdUser);
 
 		res.status(200).json(createdUser);
 	}
@@ -90,7 +90,7 @@ export class AuthController {
 
 			await user.save();
 
-			appendSession(req, user);
+			await appendSession(req, user);
 
 			return res.status(200).json(user);
 		}
@@ -101,7 +101,7 @@ export class AuthController {
 			roles: [visitorRole],
 		});
 
-		appendSession(req, createdUser);
+		await appendSession(req, createdUser);
 
 		const expirationDate = new Date();
 

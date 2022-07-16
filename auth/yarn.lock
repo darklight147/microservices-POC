@@ -74,10 +74,10 @@
     jsonwebtoken "^8.5.1"
     winston "^3.8.1"
 
-"@quasimodo147/common@^1.0.22":
-  version "1.0.22"
-  resolved "https://registry.yarnpkg.com/@quasimodo147/common/-/common-1.0.22.tgz#ed0e515e09eda21984644183693eb0c99e9b3356"
-  integrity sha512-qYlVEm54+8Mv1cmO/eBjgCfxteZ74uhvIrhExCBItPt98Z+bFYxsgDbIt1+NLmVVtfAdYbA5nT9O4PS8tYihXw==
+"@quasimodo147/common@^1.0.25":
+  version "1.0.25"
+  resolved "https://registry.yarnpkg.com/@quasimodo147/common/-/common-1.0.25.tgz#eaeb0971fbaa9022eadbbcc0b08d4538a36ca45f"
+  integrity sha512-4h2Jw7oRqZUvjk2PP9AlCTvbhrN76J5WDKnJbZnCOHZcQB3iuuBYsqAB3j1vdRsrER8IHVNy8iQBC4eBOEuBCA==
   dependencies:
     "@quasimodo147/common" "^1.0.19"
     amqplib "^0.10.0"
