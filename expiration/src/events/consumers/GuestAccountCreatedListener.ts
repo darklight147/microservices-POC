@@ -1,7 +1,7 @@
 import {
+	ExpireGuestUserPayload,
 	GuestQueues,
 	Listener,
-	ExpireGuestUserPayload,
 	log,
 } from '@quasimodo147/common';
 import { ConsumeMessage, Message } from 'amqplib';
