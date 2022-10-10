@@ -43,3 +43,9 @@ Any event that you want to receive in X amount of time really
 - Redis
 - bull.js
 - RabbitMQ
+
+### Building all services
+
+```bash
+cd build && ./build.sh
+```
