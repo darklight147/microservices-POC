@@ -6,7 +6,7 @@ export const loginValidator = [
 ];
 
 export const signupValidator = [
-	body('username').isEmail().isEmail().normalizeEmail().trim(),
+	body('username').isEmail().normalizeEmail().trim(),
 	body('password').isLength({ min: 5 }).trim(),
 ];
 
