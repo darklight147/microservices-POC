@@ -11,12 +11,7 @@ const router = Router();
 
 router.post('/login', loginValidator, validateRequest, authController.login);
 router.post('/signup', signupValidator, validateRequest, authController.signup);
-router.post(
-	'/signup/visitor',
-	signupValidator,
-	validateRequest,
-	authController.signupVisitor,
-);
+router.post('/signup/visitor', authController.signupVisitor);
 router.get('/me', authController.me);
 router.get('/logout', authController.logout);
 

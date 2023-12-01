@@ -32,7 +32,7 @@ export default function Navbar() {
 								</Link>
 							</p>
 							<p className="control">
-								<Link href="/">
+								<Link href="/auth/signup-visitor">
 									<a className="button is-primary">
 										<span>Register</span>
 									</a>

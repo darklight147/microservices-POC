@@ -17,6 +17,12 @@ function SignUpVisitor() {
 		},
 	});
 
+
+
+	if (errors) {
+		console.log(errors);
+	}
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		await doRequest();

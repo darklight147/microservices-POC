@@ -12,9 +12,10 @@ import passwordService from '../services/password.service';
 import roleService from '../services/role.service';
 import userService from '../services/user.service';
 import { appendSession } from '../utils/append-session';
+import { logger } from '../utils/logger';
 
 export class AuthController {
-	private static GUEST_EXPIRATION_WINDOW: number = 15; // Minutes
+	private static GUEST_EXPIRATION_WINDOW: number = 2; // Minutes
 
 	public async login(req: Request, res: Response) {
 		const { username, password } = req.body;
@@ -118,6 +119,10 @@ export class AuthController {
 		log.info(`Temp User ${createdUser.username} created`, createdUser);
 
 		log.info(
+			`Temp User ${createdUser.username} expires at ${expirationDate}`,
+		);
+
+		logger.info(
 			`Temp User ${createdUser.username} expires at ${expirationDate}`,
 		);
 

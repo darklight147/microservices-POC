@@ -1,20 +1,36 @@
-version: '3.1'
+version: "3.1"
 
 services:
   auth:
     build: ./auth
     environment:
-      JWT_SECRET: 'YOUR_SECRET'
-      JWT_REFRESH_SECRET: 'YOUR_REFRESH_SECRET'
-      RABBIT_URI: 'amqp://some-rabbit'
+      JWT_SECRET: "YOUR_SECRET"
+      JWT_REFRESH_SECRET: "YOUR_REFRESH_SECRET"
+      RABBIT_URI: "amqp://some-rabbit"
       PORT: 4000
       MONGO_URI: mongodb://mongo-auth/auth
+      SEQ_URL: "http://seq:5341"
     restart: unless-stopped
     ports:
-      - 4000
+      - 3000:4000
     links:
       - mongo-auth
       - some-rabbit
+    depends_on:
+      - some-rabbit
+      - mongo-auth
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--spider",
+          "http://localhost:4000/api/auth",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 30
   mongo-auth:
     image: mongo:latest
     ports:
@@ -25,30 +41,56 @@ services:
     environment:
       REDIS_HOST: some-redis
       RABBIT_URL: amqp://some-rabbit
+      SEQ_URL: "http://seq:5341"
     depends_on:
       - some-redis
       - some-rabbit
+    restart: unless-stopped
+
+  dotnet:
+    build: ./dotnet
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://*:5000"
+      SEQ_URL: "http://seq:5341"
+    ports:
+      - 5000
+
     restart: unless-stopped
 
   client:
     build: ./client
     ports:
       - 3000
-    links:
-      - auth
     environment:
       GATEWAY_URL: http://nginx:80
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    depends_on:
+      auth:
+        condition: service_healthy
 
   nginx:
     image: nginx
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 80:80
       - 443:443
     depends_on:
-      - auth
-      - client
+      client:
+        condition: service_started
+      auth:
+        condition: service_healthy
+    restart: unless-stopped
 
   logger:
     build: ./logger
@@ -61,11 +103,10 @@ services:
       - expiration
     restart: unless-stopped
 
-
   some-rabbit:
     image: rabbitmq:3-management
     healthcheck:
-      test: [ "CMD", "rabbitmq-diagnostics", "ping" ]
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
       interval: 30s
       timeout: 10s
     ports:
@@ -75,3 +116,24 @@ services:
     image: redis
     ports:
       - 6379
+
+  redis-ui:
+    image: patrikx3/p3x-redis-ui:latest
+    ports:
+      - 8081:7843
+    environment:
+      - REDIS_HOST=some-redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - REDIS_DB=0
+      - HTTP_USER=admin
+      - HTTP_PASSWORD=admin
+    volumes:
+      - ./p3x-redis-ui-settings:/settings
+
+  seq:
+    image: datalust/seq:latest
+    ports:
+      - 5341:80
+    environment:
+      - ACCEPT_EULA=Y
