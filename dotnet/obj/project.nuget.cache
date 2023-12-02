@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "VfBD+cOKCboe66SFxUCs9GgKNwUCSCtEPj/C8R+FanhVo1e6GYGqbF5HYVejMFkf2y24gfVmCtDGYI0LOUhoqA==",
+  "success": true,
+  "projectFilePath": "/Users/quasimodo/Documents/workspace/microservices-POC/dotnet/dotnetapi.csproj",
+  "expectedPackageFiles": [
+    "/Users/quasimodo/.nuget/packages/microsoft.aspnetcore.openapi/7.0.5/microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",
+    "/Users/quasimodo/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "/Users/quasimodo/.nuget/packages/microsoft.openapi/1.4.3/microsoft.openapi.1.4.3.nupkg.sha512",
+    "/Users/quasimodo/.nuget/packages/serilog/3.1.1/serilog.3.1.1.nupkg.sha512",
+    "/Users/quasimodo/.nuget/packages/serilog.formatting.compact/2.0.0/serilog.formatting.compact.2.0.0.nupkg.sha512",
+    "/Users/quasimodo/.nuget/packages/serilog.sinks.console/5.0.1/serilog.sinks.console.5.0.1.nupkg.sha512",
+    "/Users/quasimodo/.nuget/packages/serilog.sinks.file/5.0.0/serilog.sinks.file.5.0.0.nupkg.sha512",
+    "/Users/quasimodo/.nuget/packages/serilog.sinks.periodicbatching/3.1.0/serilog.sinks.periodicbatching.3.1.0.nupkg.sha512",
+    "/Users/quasimodo/.nuget/packages/serilog.sinks.seq/6.0.0/serilog.sinks.seq.6.0.0.nupkg.sha512",
+    "/Users/quasimodo/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "/Users/quasimodo/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "/Users/quasimodo/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.4.0/swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "/Users/quasimodo/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.4.0/swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -19,6 +19,7 @@ services:
     depends_on:
       - some-rabbit
       - mongo-auth
+      - seq
     healthcheck:
       test:
         [
@@ -57,6 +58,8 @@ services:
       - 5000
 
     restart: unless-stopped
+    depends_on:
+      - seq
 
   client:
     build: ./client
@@ -134,6 +137,6 @@ services:
   seq:
     image: datalust/seq:latest
     ports:
-      - 5341:80
+      - 5341:5341
     environment:
       - ACCEPT_EULA=Y
